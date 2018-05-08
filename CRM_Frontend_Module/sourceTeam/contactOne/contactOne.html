@@ -1,0 +1,157 @@
+<div class="col-md-12" style="padding-bottom: 40px;" ng-controller="ContactOneCtrl as vm">
+    <div ba-panel ba-panel-title="Thông tin ứng viên" ba-panel-class="with-scroll">
+        <div class="col-md-12">
+            <h4 class="col-md-6"></h4>
+            <div class="col-md-2" style="text-align: right !important;">
+                <label style="padding-top: 8px;" for="showFields" >Trường thông tin</label>
+            </div>
+
+            <div class="form-group col-md-4" style="text-align: right;">
+                <select id="showFields" class="form-control" title="Trường thông tin" multiple selectpicker ng-model="vm.fieldsPicker" 
+                    ng-options="item as item.label for item in vm.allFields" ng-change="vm.showFieldsPicker()">
+                </select>
+            </div>
+        </div>
+        <form name="vm.frm" class="col-md-12" ng-submit="vm.submitFunc()">
+            <div class="form-group" style="padding-bottom:40px;" ng-hide="vm.hideFields.name">
+                <div class="col-md-4">
+                    <label for="name">Họ tên</label>
+                </div>
+                <div class="col-md-7">
+                    <input type="text" ng-model="vm.name" class="form-control" id="name" required/>
+                </div>
+
+            </div>
+
+            <div class="form-group" style="padding-bottom:40px;" ng-hide="vm.hideFields.phoneNumber">
+                <div class="col-md-4">
+                    <label for="phoneNumber">Số điện thoại</label>
+                </div>
+                <div class="col-md-7">
+                    <input type="text" class="form-control" id="phoneNumber" ng-model="vm.phoneNumber" ng-change="vm.phoneChange()" required
+                        minlength="10" name="phoneNumber" maxlength="11" numbers-only>
+
+                </div>
+                <div style="padding-top: 8px;" class="col-md-1">
+                    <!-- <i class="ion-checkmark-circled form-control-feedback" aria-hidden="true"></i> -->
+                    <span ng-show="vm.loadingPhoneNumber">...</span>
+                    <span ng-show="vm.loadingPhoneNumberOK" class="ion-checkmark-circled" style="color: lawngreen;"></span>
+                    <span ng-show="vm.loadingPhoneNumberError" class="ion-android-cancel" style="color: red;">(Duplicated)</span>
+                </div>
+
+                <h2 class="col-md-4"></h2>
+                <div class="col-md-7">
+                    <span class="help-block" style="color: red; text-align: right;" ng-show="((vm.frm.phoneNumber.$error.minlength ||
+                                 vm.frm.phoneNumber.$error.maxlength) && 
+                                 vm.frm.phoneNumber.$dirty) ">
+                        Phone number should be at least 10 digits
+                    </span>
+                </div>
+            </div>
+
+
+            <div class="form-group" style="padding-bottom:40px;" ng-hide="vm.hideFields.email">
+                <div class="col-md-4">
+                    <label for="email">Email</label>
+                </div>
+                <div class="col-md-7">
+                    <input type="email" class="form-control" name="email" id="email" placeholder="ví dụ: phuongnt15@topica.edu.vn" ng-model="vm.email"
+                        required ng-change="vm.emailChange()">
+                </div>
+                <div style="padding-top: 8px;" class="col-md-1">
+                    <span ng-show="vm.loadingEmail">...</span>
+                    <span ng-show="vm.loadingEmailOK" class="ion-checkmark-circled" style="color: lawngreen;"></span>
+                    <span ng-show="vm.loadingEmailError" class="ion-android-cancel" style="color: red;">(Duplicated)</span>
+                </div>
+
+                <h2 class="col-md-4"></h2>
+                <div class="col-md-7">
+                    <span class="help-block" style="color: red; text-align: right;" ng-show="vm.frm.email.$error.email">
+                        Email is not valid
+                    </span>
+                </div>
+            </div>
+
+            <div class="form-group" style="padding-bottom:40px;" ng-hide="vm.hideFields.linkCV">
+                <div class="col-md-4">
+                    <label for="linkCV">Link CV</label>
+                </div>
+                <div class="col-md-7">
+                    <input type="url" class="form-control" id="linkCV" ng-model="vm.linkCV">
+                </div>
+            </div>
+
+            <div class="form-group" style="padding-bottom:40px;" ng-hide="vm.hideFields.order">
+                <div class="col-md-4">
+                    <label for="order">Thuộc đơn hàng</label>
+                </div>
+                <div class="col-md-7">
+                    <ui-select required ng-model="vm.withSearchOrder.selected" class="btn-group bootstrap-select form-control" ng-disabled="false"
+                        append-to-body="true" search-enabled="true">
+                        <ui-select-match placeholder="Chọn đơn hàng">
+                            {{$select.selected.label}}
+                        </ui-select-match>
+                        <ui-select-choices repeat="withSearchOrder in vm.selectWithSearchOrders | filter: $select.search">
+                            <span ng-bind-html="withSearchOrder.label"></span>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+            </div>
+
+            <div class="form-group" style="padding-bottom:40px;" ng-hide="vm.hideFields.source">
+                <div class="col-md-4">
+                    <label for="source">Nguồn</label>
+                </div>
+                <div class="col-md-7">
+                    <input type="text" class="form-control" id="source" ng-model="vm.source">
+                </div>
+            </div>
+
+            <div class="form-group" style="padding-bottom:40px;" ng-hide="vm.hideFields.createAt">
+                <div class="col-md-4">
+                    <label for="createAt">Ngày nhập liệu</label>
+                </div>
+                <div class="col-md-7" ng-controller="datepickerpopupCtrl">
+                    <!-- <input type="date" class="form-control" id="createAt" ng-model="vm.createAt"> -->
+
+                    <p class="input-group">
+                        <input type="text" ng-click="open()" class="form-control" uib-datepicker-popup="{{format}}" datepicker-options="options"
+                            ng-model="dt" is-open="opened" ng-required="true" close-text="Close" alt-input-formats="altInputFormats"
+                            show-button-bar="false" readonly ng-change="dateChange()"/>
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="open()">
+                                <i class="glyphicon glyphicon-calendar"></i>
+                            </button>
+                        </span>
+                    </p>
+                    <!-- <label>Format: <span class="muted-text">(manual alternate <em>{{altInputFormats[0]}}</em>)</span></label> <select class="form-control" ng-model="format" ng-options="f for f in formats"><option></option></select> -->
+
+                </div>
+            </div>
+
+            <div class="form-group" style="padding-bottom:40px;" ng-hide="vm.hideFields.founder">
+                <div class="col-md-4">
+                    <label for="founder">Ai tìm</label>
+                </div>
+                <div class="col-md-7">
+                    <input type="text" class="form-control" id="founder" placeholder="ví dụ: phuongnt15" ng-model="vm.founder">
+                </div>
+            </div>
+
+            <div class="form-group" style="padding-bottom:40px;" ng-hide="vm.hideFields.recommender">
+                <div class="col-md-4">
+                    <label for="recommender">Người giới thiệu</label>
+                </div>
+                <div class="col-md-7">
+                    <input type="text" class="form-control" id="recommender" ng-model="vm.recommender">
+                </div>
+            </div>
+
+            <div class="form-group col-md-12" style="text-align: center !important;">
+                <!-- <h2 class="col-md-5"></h2> -->
+                <button type="submit" class="btn btn-primary" style="width: 20%;">Nhập ứng viên</button>
+            </div>
+
+        </form>
+    </div>
+</div>

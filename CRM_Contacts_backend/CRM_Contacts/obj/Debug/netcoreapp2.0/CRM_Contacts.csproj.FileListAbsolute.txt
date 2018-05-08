@@ -1,0 +1,11 @@
+C:\Users\Hoang\source\repos\CRM_Contacts\CRM_Contacts\bin\Debug\netcoreapp2.0\CRM_Contacts.deps.json
+C:\Users\Hoang\source\repos\CRM_Contacts\CRM_Contacts\bin\Debug\netcoreapp2.0\CRM_Contacts.runtimeconfig.json
+C:\Users\Hoang\source\repos\CRM_Contacts\CRM_Contacts\bin\Debug\netcoreapp2.0\CRM_Contacts.runtimeconfig.dev.json
+C:\Users\Hoang\source\repos\CRM_Contacts\CRM_Contacts\bin\Debug\netcoreapp2.0\CRM_Contacts.dll
+C:\Users\Hoang\source\repos\CRM_Contacts\CRM_Contacts\bin\Debug\netcoreapp2.0\CRM_Contacts.pdb
+C:\Users\Hoang\source\repos\CRM_Contacts\CRM_Contacts\obj\Debug\netcoreapp2.0\CRM_Contacts.csprojResolveAssemblyReference.cache
+C:\Users\Hoang\source\repos\CRM_Contacts\CRM_Contacts\obj\Debug\netcoreapp2.0\CRM_Contacts.csproj.CoreCompileInputs.cache
+C:\Users\Hoang\source\repos\CRM_Contacts\CRM_Contacts\obj\Debug\netcoreapp2.0\CRM_Contacts.AssemblyInfoInputs.cache
+C:\Users\Hoang\source\repos\CRM_Contacts\CRM_Contacts\obj\Debug\netcoreapp2.0\CRM_Contacts.AssemblyInfo.cs
+C:\Users\Hoang\source\repos\CRM_Contacts\CRM_Contacts\obj\Debug\netcoreapp2.0\CRM_Contacts.dll
+C:\Users\Hoang\source\repos\CRM_Contacts\CRM_Contacts\obj\Debug\netcoreapp2.0\CRM_Contacts.pdb
